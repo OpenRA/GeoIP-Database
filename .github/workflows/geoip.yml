@@ -1,9 +1,8 @@
 name: GeoIP
 
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '28 13 7 * *'
 
 jobs:
   build:
