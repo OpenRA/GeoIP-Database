@@ -1,0 +1,25 @@
+name: GeoIP
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Cache GeoIP database
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Fetch GeoIP from ip2location.
+      run: ./fetch-geoip.sh
+    - name: Upload GeoIP DB to GitHub releases
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GEOIP_TOKEN }}
+        file: IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
+        tag: monthly
+        release_name: IP2Location™ LITE IP-COUNTRY Database
+        overwrite: true
+        body: "Mirrored from download.ip2location.com due to rate limits. This file is licensed under the Creative Commons Attribution-ShareAlike 4.0 International terms."
