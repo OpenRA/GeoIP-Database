@@ -3,6 +3,7 @@ name: GeoIP
 on:
   schedule:
     - cron: '28 13 7 * *'
+  workflow_dispatch:
 
 jobs:
   build:
