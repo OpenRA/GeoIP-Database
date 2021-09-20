@@ -22,4 +22,5 @@ jobs:
         with:
           files: IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
           tag_name: monthly
+          repository: OpenRA/GeoIP-Database
           token: ${{ secrets.GEOIP_TOKEN }}
