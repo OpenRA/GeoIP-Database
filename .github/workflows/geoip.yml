@@ -19,6 +19,7 @@ jobs:
      - name: Upload release asset
        uses: cb80/pubrel@latest
        with:
+         ref: monthly
          replace: latest
          token: ${{ secrets.GEOIP_TOKEN }}
          files: IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
