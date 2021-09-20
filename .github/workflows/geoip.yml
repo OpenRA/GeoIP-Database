@@ -15,7 +15,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Fetch GeoIP from ip2location.
+        id: wait-for-fetch
         run: ./fetch-geoip.sh
+
+      - name: Wait for download.
+        if: steps.wait-for-fetch.outputs.conclusion == 'success'
+        with:
+          token: ${{ secrets.GEOIP_TOKEN }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
