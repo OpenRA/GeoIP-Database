@@ -18,11 +18,13 @@ jobs:
        run: ./fetch-geoip.sh
 
      - name: Delete old release assets
-       uses: mknejp/delete-release-assets@v1
+       uses: flcdrg/remove-release-asset-action@v1.0.12
+       id: remove
+       env:
+            GITHUB_TOKEN: ${{ secrets.GEOIP_TOKEN }}
        with:
-          token: ${{ secrets.GEOIP_TOKEN }}
-          tag: monthly
-          assets: 'IP2LOCATION-LITE-DB1.IPV6.BIN.1.ZIP'
+            release_id: 49852973
+            asset_name: IP2LOCATION-LITE-DB1.IPV6.BIN.1.ZIP
 
      - name: Upload release asset
        id: upload-release-asset
