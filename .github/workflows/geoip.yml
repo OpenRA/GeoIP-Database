@@ -6,10 +6,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      id: ${{ steps.latest_release_info.outputs.id }}
+      upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
+    steps:
+      - name: Gets latest created release info
+        id: latest_release_info
+        uses: jossef/action-latest-release-info@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GEOIP_TOKEN }}
+
   download:
     name: Cache GeoIP database
-    runs-on: ubuntu-20.04
-
+    runs-on: ubuntu-latest
+    needs: release
     steps:
      - name: Clone repository
        uses: actions/checkout@v2
@@ -23,7 +35,7 @@ jobs:
        env:
             GITHUB_TOKEN: ${{ secrets.GEOIP_TOKEN }}
        with:
-            release_id: 49852973
+            release_id: ${{ needs.release.outputs.id }}
             asset_name: IP2LOCATION-LITE-DB1.IPV6.BIN.1.ZIP
 
      - name: Upload release asset
