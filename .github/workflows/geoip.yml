@@ -11,13 +11,20 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-     - name: Clone Repository
+     - name: Clone repository
        uses: actions/checkout@v2
 
      - name: Fetch GeoIP from ip2location.
        run: ./fetch-geoip.sh
 
-     - name: Upload Release Asset
+     - name: Delete old release assets
+       uses: mknejp/delete-release-assets@v1
+       with:
+          token: ${{ secrets.GEOIP_TOKEN }}
+          tag: monthly
+          assets: 'IP2LOCATION-LITE-DB1.IPV6.BIN.1.ZIP'
+
+     - name: Upload release asset
        id: upload-release-asset
        uses: actions/upload-release-asset@v1
        env:
