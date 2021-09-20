@@ -7,7 +7,7 @@ on:
 
 jobs:
   download:
-    name: Cache GeoIP database
+    name: Download GeoIP database
     runs-on: ubuntu-20.04
 
     steps:
@@ -23,24 +23,13 @@ jobs:
     needs: download
 
     steps:
-     - name: Create Release
-       id: create_release
-       uses: actions/create-release@v1
-       env:
-          GITHUB_TOKEN: ${{ secrets.GEOIP_TOKEN }}
-       with:
-          tag_name: monthly
-          release_name: IP2Location™ LITE IP-COUNTRY Database
-          draft: false
-          prerelease: false
-
      - name: Upload Release Asset
        id: upload-release-asset
        uses: actions/upload-release-asset@v1
        env:
          GITHUB_TOKEN: ${{ secrets.GEOIP_TOKEN }}
        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: https://github.com/OpenRA/GeoIP-Database/releases/download/49852973/assets?name=IP2LOCATION-LITE-DB1.IPV6.BIN.1.ZIP
           asset_path: ./IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
           asset_name: IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
           asset_content_type: application/zip
