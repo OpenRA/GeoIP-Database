@@ -21,5 +21,4 @@ jobs:
        with:
          ref: "refs/tags/monthly"
          replace: true
-         token: ${{ secrets.GEOIP_TOKEN }}
          files: IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
