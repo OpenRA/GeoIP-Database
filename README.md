@@ -1,2 +1,2 @@
-# GeoIP-Database
+# IP2Location™ LITE Cache [![GeoIP](https://github.com/OpenRA/GeoIP-Database/actions/workflows/geoip.yml/badge.svg)](https://github.com/OpenRA/GeoIP-Database/actions/workflows/geoip.yml)
 Mirrored from https://download.ip2location.com/lite/ due to rate limits. The database file is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) terms.
