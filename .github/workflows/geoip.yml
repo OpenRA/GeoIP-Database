@@ -13,6 +13,10 @@ jobs:
      - name: Clone repository
        uses: actions/checkout@v4
 
+     - name: Get current date
+       id: get_date
+       run: echo "date=$(date -Idate)" >> "$GITHUB_OUTPUT"
+
      - name: Fetch GeoIP from ip2location.
        run: ./fetch-geoip.sh
 
@@ -21,4 +25,10 @@ jobs:
        with:
          ref: "refs/tags/monthly"
          replace: true
+         files: IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
+
+     - name: Publish release with current date
+       uses: cb80/pubrel@latest
+       with:
+         ref: refs/tags/${{ steps.get_date.outputs.date }}
          files: IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
