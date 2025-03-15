@@ -7,18 +7,19 @@ on:
 
 jobs:
   download:
-    name: Cache GeoIP database
+    name: Cache GeoIP Database
     runs-on: ubuntu-latest
     steps:
-     - name: Clone repository
+     - name: Clone Repository
        uses: actions/checkout@v4
 
-     - name: Fetch GeoIP from ip2location.
+     - name: Fetch GeoIP Database
        run: ./fetch-geoip.sh
 
-     - name: Upload release asset
-       uses: cb80/pubrel@latest
-       with:
-         ref: "refs/tags/monthly"
-         replace: true
-         files: IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
+     - name: Upload Release Asset
+       env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       shell: bash
+       run: |
+          gh release delete-asset monthly IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP --yes
+          gh release upload monthly IP2LOCATION-LITE-DB1.IPV6.BIN.ZIP
